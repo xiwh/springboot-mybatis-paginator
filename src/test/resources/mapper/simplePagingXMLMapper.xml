@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xiwh.paginator.demo.simplePaging.SimplePagingXMLMapper" >
+    <resultMap id ="ATableTo" type="com.xiwh.paginator.demo.common.ATablePO">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <resultMap id ="BTableTo" type="com.xiwh.paginator.demo.common.BTablePO">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="value" property="value"/>
+        <result column="temp" property="value2"/>
+    </resultMap>
+
+    <select id = "customRowBoundsSelect" resultMap="ATableTo">
+        SELECT * FROM a where id != ${bb} or id != #{aa}
+    </select>
+
+    <select id = "customPagingRowBoundsSelect" resultMap="ATableTo">
+        SELECT * FROM a where id != ${bb} or id != #{aa}
+    </select>
+
+    <select id ="select" resultMap="BTableTo">
+        SELECT *,concat("temp",id) as temp FROM a where id != ${bb} or id != #{aa}
+    </select>
+</mapper>
