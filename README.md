@@ -1,19 +1,29 @@
 Springboot-Mybatis-Paginator
 ============
+![Maven Central](https://img.shields.io/maven-central/v/com.github.xiwh/mybatis-paginator)
+![GitHub](https://img.shields.io/github/license/xiwh/springboot-mybatis-paginator)
 
-
-
-它是一款基于Springboot的高效易用易扩展的Mybatis物理分页插件，提供基础分页、N+1分页、无侵入式物理分页、微侵入式易用分页的方式
+它是一款基于Springboot的高效易用易扩展的Mybatis全自动物理分页插件，提供基础分页、N+1分页、无侵入式物理分页、微侵入式易用分页等方式
 
 Features
 --------
+* 即插即用，您甚至不需要添加任何配置，只需引入jar包即可直接使用
 * 普通分页(基于Count聚合统计的传统管理后台分页方式)
 * N+1分页(适用于移动端上拉加载的高效分页方式)
-* 默认自动生成Count和Limit语句并兼容目前主流数据库，并提供自动优化Count的可选项，实现简单场景下的高效开发
+* 全自动化生成Count和Limit语句，支持主流数据库方言，并提供自动优化Count的可选项(默认开启)，支持包括GroupBy在内的Count语句自动生成，实现简单场景下的高效开发
 * 提供完全自定义Limit和Count语句的方案，覆盖一些复杂SQL需要手动写的场景
 * 提供Count结果缓存的可选项，适用对Count结果无强一致要求并且有一定性能要求的场景
 * 提供微侵入和无侵入两种使用方式
 * 提供完全自定义分页结构方案，可以做到快速无缝衔接到前端或已有项目中
+
+Supported databases
+--------
+* `mysql`
+* `mariadb`
+* `oracle`
+* `sqlserver`
+* `posgresql`
+* `sqlite`
 
 Setup
 --------
@@ -109,7 +119,7 @@ public interface SimplePagingMapper {
     }
 }
 ```
-***设置起始页偏移(兼容起始页从1开始前端页面)***
+***设置起始页偏移量(用以兼容前端分页参数，通常前端分页从1开始)***
 ```java
 public interface SimplePagingMapper {
     //第一种方式
@@ -205,10 +215,11 @@ public class PagingController{
     }
 }
 ```
-***启用Count缓存***
+***启用Count结果缓存***
 ```java
 public interface SimplePagingMapper {
     @Select("SELECT * FROM a")
+    //缓存有效时间3600秒
     @NormalPaginator(cache=true,cacheExpiryTime=3600)
     SimplePage<Bean> select();
 }
