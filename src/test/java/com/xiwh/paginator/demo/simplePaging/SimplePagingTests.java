@@ -76,7 +76,7 @@ class SimplePagingTests {
 
     @Test
     void testCustomCountPaging() {
-        Paginator.paginate(3,10);
+        Paginator.paginate(2,10);
         Object list = mapper.customCountSelect(321,0);
         System.out.println(list);
     }

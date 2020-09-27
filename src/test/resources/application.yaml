@@ -9,11 +9,17 @@ spring:
 #    password: 12345678
 #    driverClassName: com.mysql.jdbc.Driver
     # sqlserver
-    url: jdbc:sqlserver://124.70.7.48:1433;DatabaseName=test2
-    username: rdsuser
-    password: xxxx
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    url: jdbc:sqlserver://124.70.7.48:1433;DatabaseName=test2
+#    username: rdsuser
+#    password: xxxx
+#    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    #posgresql
+    url: jdbc:postgresql://127.0.0.1:5432/postgres?useUnicode=true&characterEncoding=utf-8
+    username: postgres
+    password: 12345678
+    driverClassName: org.postgresql.Driver
 #    type: com.alibaba.druid.pool.DruidDataSource
+
 mybatis:
   config-location: classpath:/mybatis-config.xml
   mapper-locations: classpath*:/mapper/*Mapper.xml

@@ -320,6 +320,8 @@ public interface SimplePagingMapper {
 配置
 --------
 ```yaml
+#显示分页SQL
+logging.level.com.xiwh.paginator: debug
 paginator:
   # 根据Get请求自动完成参数注入Key
   size-key: size

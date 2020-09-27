@@ -30,8 +30,16 @@ public enum DataBaseType {
         str = str.toLowerCase();
         if(str.contains(":mysql:")){
             return MYSQL;
-        }if(str.contains(":sqlserver:")){
+        }else if(str.contains(":mariadb:")){
+            return MARIADB;
+        }else if(str.contains(":postgresql:")){
+            return POSGRESQL;
+        }else if(str.contains(":oracle:")){
+            return ORACLE;
+        }else if(str.contains(":sqlserver:")){
             return SQLSERVER;
+        }else if(str.contains(":sqlite:")){
+            return SQLITE;
         }
         return null;
     }

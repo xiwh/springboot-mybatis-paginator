@@ -72,7 +72,7 @@ public class PaginatorResultHandler extends BaseInterceptor {
             NormalPaginator normalPaginator = methodInfo.getNormalPaginator();
             // The count result can be calculated on the last page
             // If the count result can be calculated directly, it is forced to update
-            boolean canGetCountResult = result.size()< pagingRowBounds.getLimit();
+            boolean canGetCountResult = result.size()!=0 && result.size() < pagingRowBounds.getLimit();
             Callable<Integer> countCall = () -> {
                 // The count result can be calculated on the last page
                 if(canGetCountResult){
