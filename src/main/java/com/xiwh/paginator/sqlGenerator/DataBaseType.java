@@ -8,7 +8,7 @@ public enum DataBaseType {
     SQLSERVER,
     MARIADB;
 
-    public String toDuirdDbType(){
+    public String toDruidDbType(){
         switch (this){
             case POSGRESQL:
                 return "postgresql";
@@ -26,23 +26,12 @@ public enum DataBaseType {
         return null;
     }
 
-    public static DataBaseType findByName(String str){
-        str = str.replaceAll("[^a-zA-Z]", "").toLowerCase();
-        switch (str){
-            case "mysql":
-                return MYSQL;
-            case "oracle":
-                return ORACLE;
-            case "posgresql":
-                return POSGRESQL;
-            case "pgsql":
-                return POSGRESQL;
-            case "sqlserver":
-                return SQLSERVER;
-            case "mariadb":
-                return MARIADB;
-            case "sqlite":
-                return SQLITE;
+    public static DataBaseType findByURL(String str){
+        str = str.toLowerCase();
+        if(str.contains(":mysql:")){
+            return MYSQL;
+        }if(str.contains(":sqlserver:")){
+            return SQLSERVER;
         }
         return null;
     }

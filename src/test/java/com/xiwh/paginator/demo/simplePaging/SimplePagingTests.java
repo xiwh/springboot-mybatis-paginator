@@ -43,8 +43,8 @@ class SimplePagingTests {
 
     @Test
     void testBasicPaging() {
-        Paginator.paginate(2,10);
-        SimplePage<ATablePO> page = mapper.select("\"AA'",0);
+        Paginator.paginate(0,10);
+        SimplePage<ATablePO> page = mapper.select(321,0);
         System.out.println(page);
         System.out.println(page.hasLast());
         System.out.println(page.hasNext());
@@ -62,14 +62,14 @@ class SimplePagingTests {
     @Test
     void testOriginalPaging() {
         RowBounds rowBounds = new RowBounds(10,10);
-        Object list = mapper.customRowBoundsSelect("\"AA'",0, rowBounds);
+        Object list = mapper.customRowBoundsSelect(321,0, rowBounds);
         System.out.println(list);
     }
 
     @Test
     void testAdvancedPaging() {
-        PagingRowBounds rowBounds = new PagingRowBounds(1,10,1,false);
-        List list = mapper.customPagingRowBoundsSelect("\"AA'",0, rowBounds);
+        PagingRowBounds rowBounds = new PagingRowBounds(3,10,1,false);
+        List list = mapper.customPagingRowBoundsSelect(321,0, rowBounds);
         System.out.println(rowBounds);
         System.out.println(rowBounds.toNormalPage(SimplePage.class, list));
     }
@@ -77,14 +77,14 @@ class SimplePagingTests {
     @Test
     void testCustomCountPaging() {
         Paginator.paginate(3,10);
-        Object list = mapper.customCountSelect("\"AA'",0);
+        Object list = mapper.customCountSelect(321,0);
         System.out.println(list);
     }
 
     @Test
     void testCustomLimitPaging() {
         Paginator.paginate(0,10);
-        Object list = mapper.customCountSelect("\"AA'",0);
+        Object list = mapper.customCountSelect(123,0);
         System.out.println(list);
     }
 

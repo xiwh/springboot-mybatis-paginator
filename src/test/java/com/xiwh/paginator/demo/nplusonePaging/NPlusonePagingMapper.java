@@ -28,6 +28,6 @@ public interface NPlusonePagingMapper {
 
     @Select("SELECT * FROM a where id != ${bb} or id != #{aa}")
     @NPlusOnePaginator(auto = true, startOffset = 1)
-    NPlusOnePage<ATablePO> requestPaging(String aa, Integer bb);
+    NPlusOnePage<ATablePO> requestPaging(Integer aa, Integer bb);
 
 }

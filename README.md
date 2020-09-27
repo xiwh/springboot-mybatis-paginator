@@ -21,7 +21,7 @@ Supported databases
 * `mysql`
 * `mariadb`
 * `oracle`
-* `sqlserver`
+* `sqlserver>=2012`
 * `posgresql`
 * `sqlite`
 

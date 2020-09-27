@@ -83,9 +83,11 @@ public class PaginatorSqlGenerator {
                     TEMP_TABLE2_ALIAS,
                     TEMP_ROWNUM_ALIAS,
                     offset
-
             );
-        }else{
+        }else if(dataBaseType == DataBaseType.SQLSERVER){
+            String sql = toSQLString(sqlSelect, dataBaseType);
+            return String.format("%s OFFSET %s ROWS FETCH NEXT %s ROWS ONLY", sql, offset, limit);
+        }else {
             selectQueryBlock.limit(limit, offset);
             return toSQLString(sqlSelect, dataBaseType);
         }
@@ -140,8 +142,9 @@ public class PaginatorSqlGenerator {
         SQLSelect sqlSelect = rawSelect.clone();
         SQLSelectQuery selectQuery = sqlSelect.getQuery();
         SQLSelectQueryBlock selectQueryBlock = (SQLSelectQueryBlock) selectQuery;
-        selectQueryBlock.setOrderBy(null);
         String havingStr = null;
+        //Remove order by
+        selectQueryBlock.setOrderBy(null);
         List<SQLSelectItem> selectItems = selectQueryBlock.getSelectList();
         SQLSelectGroupByClause groupByClause = selectQueryBlock.getGroupBy();
         boolean needWrapUp = false;

@@ -13,30 +13,30 @@ import java.util.List;
 
 @Mapper
 public interface SimplePagingMapper {
-    @Select("SELECT * FROM a where id != ${bb} or id != #{aa}")
+    @Select("SELECT * FROM a where id != ${bb} or id != #{aa} order by id")
     @NormalPaginator
-    List<ATablePO> customRowBoundsSelect(String aa, Integer bb, RowBounds rowBounds);
+    List<ATablePO> customRowBoundsSelect(Integer aa, Integer bb, RowBounds rowBounds);
 
-    @Select("SELECT * FROM a where id != ${bb} or id != #{aa}")
+    @Select("SELECT * FROM a where id != ${bb} or id != #{aa} order by id")
     @NormalPaginator
-    List<ATablePO> customPagingRowBoundsSelect(String aa, Integer bb, PagingRowBounds rowBounds);
+    List<ATablePO> customPagingRowBoundsSelect(Integer aa, Integer bb, PagingRowBounds rowBounds);
 
-    @Select("SELECT * FROM a")
+    @Select("SELECT * FROM a order by id")
     @NormalPaginator()
-    SimplePage<ATablePO> select(String aa, Integer bb);
+    SimplePage<ATablePO> select(Integer aa, Integer bb);
 
-    @Select("SELECT * FROM a where id != ${bb} or id != #{aa}")
+    @Select("SELECT * FROM a where id != ${bb} or id != #{aa} order by id")
     @NormalPaginator(auto = true, startOffset = 1, cacheExpiryTime = 300)
-    SimplePage<ATablePO> requestPaging(String aa, Integer bb);
+    SimplePage<ATablePO> requestPaging(Integer aa, Integer bb);
 
-    @Select("SELECT * FROM a where id != ${bb} or id != #{aa}")
+    @Select("SELECT * FROM a where id != ${bb} or id != #{aa} order by id")
     @NormalPaginator(countMethod = "customCount")
-    SimplePage<ATablePO> customCountSelect(String aa, Integer bb);
+    SimplePage<ATablePO> customCountSelect(Integer aa, Integer bb);
 
     @Select("SELECT count(1) FROM a where id != ${bb} or id != #{aa}")
-    Integer customCount(String aa, Integer bb);
+    Integer customCount(Integer aa, Integer bb);
 
     @Select("SELECT * FROM a where id != ${bb} or id != #{aa} limit :offset,:limit")
     @NormalPaginator(customLimit = true, countMethod = "customCount")
-    SimplePage<ATablePO> customLimitSelect(String aa, Integer bb);
+    SimplePage<ATablePO> customLimitSelect(Integer aa, Integer bb);
 }

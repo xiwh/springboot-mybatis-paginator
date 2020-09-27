@@ -15,14 +15,14 @@
     </resultMap>
 
     <select id = "customRowBoundsSelect" resultMap="ATableTo">
-        SELECT * FROM a where id != ${bb} or id != #{aa}
+        SELECT * FROM a where id != ${bb} or id != #{aa} order by id
     </select>
 
     <select id = "customPagingRowBoundsSelect" resultMap="ATableTo">
-        SELECT * FROM a where id != ${bb} or id != #{aa}
+        SELECT * FROM a where id != ${bb} or id != #{aa} order by id
     </select>
 
     <select id ="select" resultMap="BTableTo">
-        SELECT *,concat("temp",id) as temp FROM a where id != ${bb} or id != #{aa}
+        SELECT *,concat("temp",id) as temp FROM a where id != ${bb} or id != #{aa} order by id
     </select>
 </mapper>

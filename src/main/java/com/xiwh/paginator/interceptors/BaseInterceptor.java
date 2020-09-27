@@ -20,10 +20,7 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -66,8 +63,8 @@ public abstract class BaseInterceptor implements Interceptor {
                 dataBaseType = dbTypeMap.get(id);
                 if (dataBaseType == null) {
                     try {
-                        dataBaseType = DataBaseType.findByName(
-                                getConnection().getMetaData().getDatabaseProductName()
+                        dataBaseType = DataBaseType.findByURL(
+                                getConnection().getMetaData().getURL()
                         );
                         dbTypeMap.put(id, dataBaseType);
                     } catch (Exception e) {

@@ -73,7 +73,7 @@ class PagingController {
     @RequestMapping("/test1")
     public Map requestPaging(HttpServletRequest request){
         System.out.println("[[["+Thread.currentThread().getName());
-        Map map = simplePagingMapper.requestPaging("aa",123).toMap();
+        Map map = simplePagingMapper.requestPaging(321,123).toMap();
         System.out.println("]]]");
         return map;
     }
@@ -170,7 +170,7 @@ class PagingController {
     @RequestMapping("/test2")
     public Map requestNplusOnePaging(HttpServletRequest request){
         System.out.println("[[["+Thread.currentThread().getId());
-        Map map =  nPlusonePagingMapper.requestPaging("aa",123).toMap();
+        Map map =  nPlusonePagingMapper.requestPaging(321,123).toMap();
         System.out.println("]]]");
         return map;
     }
