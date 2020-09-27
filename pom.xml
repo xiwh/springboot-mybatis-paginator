@@ -8,9 +8,9 @@
         <version>2.3.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.xiwh</groupId>
-    <artifactId>springboot-mybatis-paginator</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.github.xiwh</groupId>
+    <artifactId>mybatis-paginator</artifactId>
+    <version>1.0.0</version>
     <name>springboot-mybatis-paginator</name>
     <description>SpringBoot+Mybatis+Physical paginator</description>
 
