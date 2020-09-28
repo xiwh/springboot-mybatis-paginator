@@ -43,6 +43,16 @@ Maven:
 
 快速使用
 --------
+***(必须)将"com.xiwh.paginator"加入到自动扫描路径下，如下***
+```java
+@SpringBootApplication
+@ComponentScan({"com.xiwh.paginator","com.example.demo"})
+public class DemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+}
+```
 ***普通分页***
 ```java
 public interface SimplePagingMapper {
@@ -52,7 +62,9 @@ public interface SimplePagingMapper {
     
     public static void main(String[] args){
         SimplePagingMapper mapper = xxx;
-        Paginator.paginate(2,10);
+        int page = 0;
+        int size = 10;
+        Paginator.paginate(page,size);
         SimplePage<Bean> page = mapper.select();
         System.out.println(page);
         System.out.println(page.hasLast());
@@ -79,7 +91,7 @@ public interface NPlusOnePagingMapper {
     
     public static void main(String[] args){
         NPlusOnePagingMapper mapper = xxx;
-        Paginator.paginate(2,10);
+        Paginator.paginate(0,10);
         NPlusOnePage<Bean> page = mapper.select();
         System.out.println(page);
         System.out.println(page.hasNext());
