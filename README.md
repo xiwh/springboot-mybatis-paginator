@@ -269,8 +269,8 @@ public interface SimplePagingMapper {
 public class MyPagingResult<T> extends NormalPageWrapperBase<T> {
 
     private int total;
-    private transient int startOffset;
-    private transient int physicalPage;
+    private int startOffset;
+    private int physicalPage;
     private int page;
     private int size;
     private int totalPage;
