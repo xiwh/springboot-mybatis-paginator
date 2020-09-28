@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.PostConstruct;
 
 @Component("Springboot-Mybatis-Paginator")
@@ -39,7 +40,10 @@ public class Paginator {
     }
 
     protected void _autoInject() throws ClassNotFoundException {
-        javax.servlet.http.HttpServletRequest request = context.getBean(javax.servlet.http.HttpServletRequest.class);
+        org.springframework.web.context.request.ServletRequestAttributes servletRequestAttributes =
+                (org.springframework.web.context.request.ServletRequestAttributes)
+                        org.springframework.web.context.request.RequestContextHolder.getRequestAttributes();
+        javax.servlet.http.HttpServletRequest request = servletRequestAttributes.getRequest();
         int page = StringUtils.safeToInt(request.getParameter(this.queryPageKey),0);
         int size = StringUtils.safeToInt(request.getParameter(this.querySizeKey),defaultSize);
         _startPaginate(page, size, false);
