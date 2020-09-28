@@ -3,13 +3,11 @@ package com.xiwh.paginator;
 import com.xiwh.paginator.interceptors.PaginatorLimitHandler;
 import com.xiwh.paginator.utils.StringUtils;
 import com.xiwh.paginator.wrappers.PageParamsWrapper;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 
 @Component("Springboot-Mybatis-Paginator")
 public class Paginator {
@@ -21,9 +19,9 @@ public class Paginator {
     @Autowired
     PaginatorLimitHandler paginatorInterceptor;
     @Autowired
-    private HttpServletRequest request;
-    @Autowired
     private Environment environment;
+    @Autowired
+    private ApplicationContext context;
     String queryPageKey;
     String querySizeKey;
     Integer defaultSize;
@@ -40,7 +38,8 @@ public class Paginator {
         pageParamsThreadLocal.set(new PageParamsWrapper(page, size, forceCounting));
     }
 
-    protected void _autoInject(){
+    protected void _autoInject() throws ClassNotFoundException {
+        javax.servlet.http.HttpServletRequest request = context.getBean(javax.servlet.http.HttpServletRequest.class);
         int page = StringUtils.safeToInt(request.getParameter(this.queryPageKey),0);
         int size = StringUtils.safeToInt(request.getParameter(this.querySizeKey),defaultSize);
         _startPaginate(page, size, false);
@@ -66,6 +65,10 @@ public class Paginator {
 
 
     public static void autoInjectFromRequest(){
-        instance._autoInject();
+        try {
+            instance._autoInject();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }
