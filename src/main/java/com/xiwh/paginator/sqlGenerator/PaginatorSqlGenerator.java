@@ -135,7 +135,6 @@ public class PaginatorSqlGenerator {
      * What are the optimization cases:
      * 1.Clean invalid order by
      * 2.Clean invalid select
-     * 3.Replace the group without having with count(distinct xxx)
      * @return Optimized count SQL
      */
     public String toOptimizedCountSql(){
@@ -151,10 +150,12 @@ public class PaginatorSqlGenerator {
         //Has groupBy or having
         if(groupByClause!=null){
             SQLExpr having = groupByClause.getHaving();
+            if(!groupByClause.getItems().isEmpty()) {
+                needWrapUp = true;
+            }
             // If there is "having", "select" will be cleaned up based on the "having" reference
             if(having!=null){
                 havingStr = having.toString();
-                needWrapUp = true;
                 Iterator<SQLSelectItem> iterator = selectItems.iterator();
                 while (iterator.hasNext()) {
                     SQLSelectItem item = iterator.next();
@@ -179,14 +180,9 @@ public class PaginatorSqlGenerator {
             //Replace the group without having with count(distinct xxx)
             else{
                 selectItems.clear();
-                SQLExpr[] groupByExprs = groupByClause.getItems().toArray(new SQLExpr[groupByClause.getItems().size()]);
                 selectItems.add(
                         new SQLSelectItem(
-                                new SQLAggregateExpr(
-                                        "count",
-                                        SQLAggregateOption.DISTINCT,
-                                        groupByExprs
-                                ),COUNT_ALIAS
+                                new SQLIntegerExpr(1),TEMP_VAR_ALIAS
                         )
                 );
                 selectQueryBlock.setGroupBy(null);
