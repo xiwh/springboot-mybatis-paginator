@@ -30,7 +30,7 @@ Setup
 
 Gradle:
 ```groovy
-compile 'com.github.xiwh:mybatis-paginator:1.0.0'
+compile 'com.github.xiwh:mybatis-paginator:1.0.2'
 ```
 Maven:
 ```xml
