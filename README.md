@@ -37,7 +37,7 @@ Maven:
 <dependency>
   <groupId>com.github.xiwh</groupId>
   <artifactId>mybatis-paginator</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
